@@ -24,7 +24,7 @@ interface UserDao {
      * Inserts or updates [entities] in the db under the specified primary keys
      */
     @Upsert
-    suspend fun upsertTopics(entities: List<UserEntity>)
+    suspend fun upsertUsers(entities: List<UserEntity>)
 
     /**
      * Inserts [userEntities] into the db if they don't exist, and ignores those that do

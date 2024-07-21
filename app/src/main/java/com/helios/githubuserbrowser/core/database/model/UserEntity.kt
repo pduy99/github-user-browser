@@ -16,7 +16,9 @@ data class UserEntity(
     @ColumnInfo(defaultValue = "")
     val location: String,
     val followers: Int,
-    val following: Int
+    val following: Int,
+    @ColumnInfo(defaultValue = "false")
+    val isLoadedDetail: Boolean,
 )
 
 fun UserEntity.asExternalModel() = UserModel(

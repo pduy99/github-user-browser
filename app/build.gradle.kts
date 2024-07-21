@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.paging.runtime)
     implementation(libs.paging.compose)
+    implementation(libs.androidx.navigation.compose)
 
     // Hilt
     implementation(libs.androidx.hilt.navigation.compose)
@@ -91,6 +92,7 @@ dependencies {
     // Coil
     implementation(libs.coil.kt)
     implementation(libs.coil.kt.svg)
+    implementation(libs.coil.kt.compose)
 
     // Room
     implementation(libs.room.runtime)
@@ -103,6 +105,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.navigation.testing)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

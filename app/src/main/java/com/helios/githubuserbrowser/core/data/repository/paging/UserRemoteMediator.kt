@@ -1,5 +1,6 @@
 package com.helios.githubuserbrowser.core.data.repository.paging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -42,7 +43,7 @@ internal class UserRemoteMediator @Inject constructor(
                     database.userDao.clearAll()
                 }
 
-                database.userDao.upsertTopics(users.map { it.toUserEntity() })
+                database.userDao.upsertUsers(users.map { it.toUserEntity() })
             }
 
             MediatorResult.Success(endOfPaginationReached = users.isEmpty())

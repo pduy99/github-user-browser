@@ -20,6 +20,7 @@ kotlinxSerializationJson = "1.6.3"
 coil = "2.6.0"
 room = "2.6.1"
 paging = "3.3.0"
+androidxNavigation = "2.8.0-beta05"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -55,6 +56,8 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-paging = {group = "androidx.room", name = "room-paging", version.ref = "room"}
 paging-runtime = {group = "androidx.paging", name = "paging-runtime", version.ref = "paging"}
 paging-compose = {group = "androidx.paging", name = "paging-compose", version.ref = "paging"}
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
+androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidxNavigation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
