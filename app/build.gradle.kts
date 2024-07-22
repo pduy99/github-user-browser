@@ -11,11 +11,11 @@ plugins {
 }
 
 android {
-    namespace = "com.helios.githubuserbrowser"
+    namespace = "com.example.githubuserbrowser"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.helios.githubuserbrowser"
+        applicationId = "com.example.githubuserbrowser"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
