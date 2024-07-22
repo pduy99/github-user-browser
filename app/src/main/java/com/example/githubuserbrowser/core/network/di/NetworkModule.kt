@@ -14,6 +14,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.Call
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
@@ -32,6 +33,14 @@ internal object NetworkModule {
     @Singleton
     fun okHttpCallFactory(): Call.Factory =
         OkHttpClient.Builder()
+            .addNetworkInterceptor { chain ->
+                chain.proceed(
+                    chain.request()
+                        .newBuilder()
+                        .header("User-Agent", "GitHubUserBrowser")
+                        .build()
+                )
+            }
             .addInterceptor(
                 HttpLoggingInterceptor()
                     .apply {

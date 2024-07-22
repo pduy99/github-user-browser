@@ -22,20 +22,16 @@ internal class UserRemoteMediator @Inject constructor(
         state: PagingState<Int, UserEntity>
     ): MediatorResult {
         return try {
-            val offset = when (loadType) {
-                LoadType.REFRESH -> 0
+            val since = when (loadType) {
+                LoadType.REFRESH -> "0"
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()
-                    if (lastItem == null) {
-                        0
-                    } else {
-                        (state.pages.last().data.size / state.config.pageSize) + 1
-                    }
+                    lastItem?.id ?: "0"
                 }
             }
 
-            val users = network.getListUser(offset, state.config.pageSize)
+            val users = network.getListUser(since.toString(), state.config.pageSize)
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {

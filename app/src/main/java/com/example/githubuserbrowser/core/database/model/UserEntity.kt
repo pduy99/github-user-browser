@@ -9,6 +9,7 @@ import com.example.githubuserbrowser.core.data.model.UserModel
     tableName = "users"
 )
 data class UserEntity(
+    val id: Int,
     @PrimaryKey
     val userName: String,
     val avatarUrl: String,

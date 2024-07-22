@@ -13,6 +13,7 @@ data class UserModel(
 )
 
 fun UserDto.toUserEntity() = UserEntity(
+    id = id,
     userName = userName,
     avatarUrl = avatarUrl,
     landingPageUrl = landingPageUrl,

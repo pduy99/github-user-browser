@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 private interface RetrofitApi {
     @GET("users")
-    suspend fun getUsers(@Query("page") page: Int, @Query("per_page") perPage: Int): List<UserDto>
+    suspend fun getUsers(@Query("since") since: String, @Query("per_page") perPage: Int): List<UserDto>
 
     @GET("users/{userName}")
     suspend fun getUser(@Path("userName") username: String): UserDto
@@ -39,8 +39,8 @@ internal class RetrofitUserDataSource @Inject constructor(
         .build()
         .create(RetrofitApi::class.java)
 
-    override suspend fun getListUser(page: Int, perPage: Int): List<UserDto> {
-        return networkApi.getUsers(page, perPage)
+    override suspend fun getListUser(since: String, perPage: Int): List<UserDto> {
+        return networkApi.getUsers(since, perPage)
     }
 
     override suspend fun getUserDetail(userName: String): UserDto {
