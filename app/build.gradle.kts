@@ -81,6 +81,7 @@ dependencies {
     // Hilt
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.junit.ktx)
     ksp(libs.hilt.compiler)
     ksp(libs.hilt.ext.compiler)
 
@@ -108,4 +109,8 @@ dependencies {
     androidTestImplementation(libs.androidx.navigation.testing)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(libs.androidx.runner)
+    testImplementation(libs.mockito.core)
+    testImplementation (libs.hilt.android.testing.v244)
+    testImplementation (libs.robolectric)
 }
