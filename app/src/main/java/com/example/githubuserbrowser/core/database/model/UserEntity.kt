@@ -12,6 +12,7 @@ data class UserEntity(
     val id: Int,
     @PrimaryKey
     val userName: String,
+    val fullName: String,
     val avatarUrl: String,
     val landingPageUrl: String,
     @ColumnInfo(defaultValue = "")
@@ -22,11 +23,3 @@ data class UserEntity(
     val isLoadedDetail: Boolean,
 )
 
-fun UserEntity.asExternalModel() = UserModel(
-    userName = userName,
-    avatarUrl = avatarUrl,
-    landingPageUrl = landingPageUrl,
-    location = location,
-    followers = followers,
-    following = following
-)

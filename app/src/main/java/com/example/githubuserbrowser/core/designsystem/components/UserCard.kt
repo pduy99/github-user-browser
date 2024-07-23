@@ -32,17 +32,15 @@ fun UserCard(user: UserModel, onClick: (String) -> Unit, modifier: Modifier = Mo
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(top = 8.dp)
-                .padding(horizontal = 2.dp),
+                .padding(horizontal = 4.dp),
             maxLines = 2
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = user.landingPageUrl,
-            fontSize = 16.sp,
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .padding(horizontal = 2.dp)
-        )
+        user.landingPageUrl.let { homepageUrl ->
+            HyperlinkText(fullText = homepageUrl, linkText = listOf(homepageUrl), hyperlinks = listOf(homepageUrl), fontSize = 14.sp, modifier = Modifier
+                .padding(horizontal = 4.dp))
+        }
+        Spacer(modifier = Modifier.height(4.dp))
     }
 }
 

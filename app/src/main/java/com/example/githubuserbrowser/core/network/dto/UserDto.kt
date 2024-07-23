@@ -1,6 +1,5 @@
 package com.example.githubuserbrowser.core.network.dto
 
-import com.example.githubuserbrowser.core.data.model.UserModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,14 +15,10 @@ data class UserDto(
     val landingPageUrl: String,
     @SerialName("location")
     val location: String? = null,
+    @SerialName("name")
+    val fullName: String? = null,
     @SerialName("followers")
     val followers: Int? = null,
     @SerialName("following")
     val following: Int? = null
-)
-
-fun UserDto.asExternalModel() = UserModel(
-    userName = userName,
-    avatarUrl = avatarUrl,
-    landingPageUrl = landingPageUrl
 )

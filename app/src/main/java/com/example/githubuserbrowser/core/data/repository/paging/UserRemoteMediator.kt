@@ -6,7 +6,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.example.githubuserbrowser.core.data.model.toUserEntity
+import com.example.githubuserbrowser.core.data.repository.UserMapper
 import com.example.githubuserbrowser.core.database.GubDatabase
 import com.example.githubuserbrowser.core.database.model.UserEntity
 import com.example.githubuserbrowser.core.network.NetworkUserDataSource
@@ -15,7 +15,8 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 internal class UserRemoteMediator @Inject constructor(
     private val network: NetworkUserDataSource,
-    private val database: GubDatabase
+    private val database: GubDatabase,
+    private val mapper: UserMapper
 ) : RemoteMediator<Int, UserEntity>() {
 
     override suspend fun load(
@@ -39,7 +40,7 @@ internal class UserRemoteMediator @Inject constructor(
                     database.userDao.clearAll()
                 }
 
-                database.userDao.upsertUsers(users.map { it.toUserEntity() })
+                database.userDao.upsertUsers(users.map { mapper.toUserEntity(it) })
             }
 
             MediatorResult.Success(endOfPaginationReached = users.isEmpty())

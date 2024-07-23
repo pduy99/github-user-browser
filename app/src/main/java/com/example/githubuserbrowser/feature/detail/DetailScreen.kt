@@ -1,9 +1,11 @@
 package com.example.githubuserbrowser.feature.detail
 
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -27,10 +29,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ImageShader
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.githubuserbrowser.R
 import com.example.githubuserbrowser.core.designsystem.components.AvatarImageView
 import com.example.githubuserbrowser.core.designsystem.components.HyperlinkText
 import com.example.githubuserbrowser.core.designsystem.components.IndeterminateCircularIndicator
@@ -96,38 +102,91 @@ fun UserDetailScreen(uiState: UIState, onBackPressed: () -> Unit) {
                 uiState.userDetail?.let {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = it.userName,
+                        text = it.fullName.toString(),
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp,
+                        fontSize = 28.sp,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = "@" + it.userName,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 22.sp,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                     Spacer(modifier = Modifier.height(16.dp))
 
                     if (it.location?.isNotEmpty() == true) {
+                        Row(modifier = Modifier) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_home),
+                                contentDescription = "",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .height(24.dp)
+                                    .width(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = it.location,
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontSize = 20.sp
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(modifier = Modifier) {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_follower),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .height(24.dp)
+                                .width(24.dp)
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "Location: " + it.location,
+                            text = "Followers |",
                             style = MaterialTheme.typography.bodyMedium,
-                            fontSize = 16.sp
+                            fontSize = 20.sp
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = it.followers.toString(),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontSize = 20.sp
                         )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Followers " + it.followers,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontSize = 16.sp
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Following " + it.following,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontSize = 16.sp
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(modifier = Modifier) {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_following),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .height(24.dp)
+                                .width(24.dp)
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = "Following |",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontSize = 20.sp
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = it.following.toString(),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontSize = 20.sp
+                        )
+                    }
 
+                    Spacer(modifier = Modifier.height(8.dp))
                     it.landingPageUrl.let { homepageUrl ->
                         val showText = "For more information: $homepageUrl"
-                        HyperlinkText(fullText = showText, linkText = listOf(homepageUrl), hyperlinks = listOf(homepageUrl), fontSize = 16.sp)
+                        HyperlinkText(fullText = showText, linkText = listOf(homepageUrl), hyperlinks = listOf(homepageUrl), fontSize = 20.sp)
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                 }

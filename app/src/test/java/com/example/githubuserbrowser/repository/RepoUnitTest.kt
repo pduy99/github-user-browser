@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.example.githubuserbrowser.core.data.di.PagerModule.provideUserPager
 import com.example.githubuserbrowser.core.data.model.UserModel
 import com.example.githubuserbrowser.core.data.repository.OfflineFirstUserRepository
+import com.example.githubuserbrowser.core.data.repository.UserMapper
 import com.example.githubuserbrowser.core.data.repository.UserRepository
 import com.example.githubuserbrowser.core.database.GubDatabase
 import com.example.githubuserbrowser.core.database.dao.UserDao
@@ -42,14 +43,16 @@ class RepoUnitTest {
 
     private var database : GubDatabase? = null
 
+    private var mapper = UserMapper()
+
     @Before
     fun setUp() {
         networkUserDataSource = mock(NetworkUserDataSource::class.java)
         val context = ApplicationProvider.getApplicationContext<Context>()
         database = Room.inMemoryDatabaseBuilder(context, GubDatabase::class.java).allowMainThreadQueries().build()
         userDao = database?.userDao
-        userRepository = OfflineFirstUserRepository(provideUserPager(networkUserDataSource!!, database!!),
-            userDao!!, networkUserDataSource!!)
+        userRepository = OfflineFirstUserRepository(provideUserPager(networkUserDataSource!!, database!!, mapper),
+            userDao!!, networkUserDataSource!!, mapper)
     }
 
     @After

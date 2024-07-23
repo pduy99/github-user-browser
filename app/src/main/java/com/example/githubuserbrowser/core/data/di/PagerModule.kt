@@ -3,6 +3,7 @@ package com.example.githubuserbrowser.core.data.di
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.example.githubuserbrowser.core.data.repository.UserMapper
 import com.example.githubuserbrowser.core.data.repository.paging.UserRemoteMediator
 import com.example.githubuserbrowser.core.database.GubDatabase
 import com.example.githubuserbrowser.core.database.model.UserEntity
@@ -22,17 +23,19 @@ internal object PagerModule {
     @Singleton
     fun provideUserPager(
         network: NetworkUserDataSource,
-        database: GubDatabase
+        database: GubDatabase,
+        userMapper: UserMapper
     ): Pager<Int, UserEntity> {
         return Pager(
             config = PagingConfig(pageSize = 20),
             remoteMediator = UserRemoteMediator(
                 network = network,
-                database
+                database,
+                mapper = userMapper
             ),
             pagingSourceFactory = {
                 database.userDao.pagingSource()
-            },
+            }
         )
     }
 }
