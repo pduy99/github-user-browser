@@ -1,5 +1,6 @@
 package com.example.githubuserbrowser.core.data.repository.paging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -32,7 +33,7 @@ internal class UserRemoteMediator @Inject constructor(
             }
 
             val users = network.getListUser(since.toString(), state.config.pageSize)
-
+            Log.d("Mediators ", users.toString())
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     database.userDao.clearAll()

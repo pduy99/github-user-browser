@@ -11,21 +11,21 @@ class MapperUnitTest {
 
     @Test
     fun mapper_userDto_to_userEntity_isCorrect(){
-        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123")
+        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123", "m", 0 ,0)
         val userEntity = userDto.toUserEntity()
         assertEquals(userDto.id, userEntity.id)
         assertEquals(userDto.userName, userEntity.userName)
         assertEquals(userDto.avatarUrl, userEntity.avatarUrl)
         assertEquals(userDto.landingPageUrl, userEntity.landingPageUrl)
-        assertEquals("", userEntity.location)
-        assertEquals(0, userEntity.followers)
-        assertEquals(0, userEntity.following)
+        assertEquals(userDto.location, userEntity.location)
+        assertEquals(userDto.followers, userEntity.followers)
+        assertEquals(userDto.following, userEntity.following)
         assertFalse(userEntity.isLoadedDetail)
     }
 
     @Test
     fun mapper_userDto_to_userModel_isCorrect(){
-        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123")
+        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123", "m", 0 ,0)
         val userModel = userDto.asExternalModel()
         assertEquals(userDto.userName, userModel.userName)
         assertEquals(userDto.avatarUrl, userModel.avatarUrl)

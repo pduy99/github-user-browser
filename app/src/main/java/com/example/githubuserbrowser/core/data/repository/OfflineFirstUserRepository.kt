@@ -1,5 +1,6 @@
 package com.example.githubuserbrowser.core.data.repository
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingData
 import androidx.paging.map
@@ -23,7 +24,9 @@ class OfflineFirstUserRepository @Inject constructor(
 
     override fun getUserList(): Flow<PagingData<UserModel>> {
         return userPager.flow.map { pagingData ->
-            pagingData.map { it.asExternalModel() }
+            pagingData.map {
+                Log.d("getUserList ", it.userName)
+                it.asExternalModel() }
         }
     }
 

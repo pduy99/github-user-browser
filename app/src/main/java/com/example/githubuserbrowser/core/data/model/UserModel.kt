@@ -17,8 +17,8 @@ fun UserDto.toUserEntity() = UserEntity(
     userName = userName,
     avatarUrl = avatarUrl,
     landingPageUrl = landingPageUrl,
-    location = "",
-    followers = 0,
-    following = 0,
+    location = location ?: "",
+    followers = followers ?: 0,
+    following = following ?: 0,
     isLoadedDetail = false,
 )

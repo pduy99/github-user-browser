@@ -13,7 +13,13 @@ data class UserDto(
     @SerialName("avatar_url")
     val avatarUrl: String,
     @SerialName("html_url")
-    val landingPageUrl: String
+    val landingPageUrl: String,
+    @SerialName("location")
+    val location: String? = null,
+    @SerialName("followers")
+    val followers: Int? = null,
+    @SerialName("following")
+    val following: Int? = null
 )
 
 fun UserDto.asExternalModel() = UserModel(
