@@ -11,7 +11,7 @@ class MapperUnitTest {
 
     @Test
     fun mapper_userDto_to_userEntity_isCorrect(){
-        val userDto = UserDto("0","hai123", "https://github.com/hai123.png", "https://github.com/hai123")
+        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123")
         val userEntity = userDto.toUserEntity()
         assertEquals(userDto.id, userEntity.id)
         assertEquals(userDto.userName, userEntity.userName)
@@ -25,7 +25,7 @@ class MapperUnitTest {
 
     @Test
     fun mapper_userDto_to_userModel_isCorrect(){
-        val userDto = UserDto("0","hai123", "https://github.com/hai123.png", "https://github.com/hai123")
+        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123")
         val userModel = userDto.asExternalModel()
         assertEquals(userDto.userName, userModel.userName)
         assertEquals(userDto.avatarUrl, userModel.avatarUrl)

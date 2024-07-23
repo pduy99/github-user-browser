@@ -11,6 +11,7 @@ import com.example.githubuserbrowser.core.database.GubDatabase
 import com.example.githubuserbrowser.core.database.dao.UserDao
 import com.example.githubuserbrowser.core.database.model.UserEntity
 import com.example.githubuserbrowser.core.network.NetworkUserDataSource
+import com.example.githubuserbrowser.core.network.dto.UserDto
 import dagger.hilt.android.testing.HiltAndroidRule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import javax.inject.Inject
@@ -32,9 +34,9 @@ import javax.inject.Inject
 @RunWith(RobolectricTestRunner::class)
 class RepoUnitTest {
 
-    var userRepository: UserRepository? = null
+    private var userRepository: UserRepository? = null
 
-    var userDao: UserDao? = null
+    private var userDao: UserDao? = null
 
     private var networkUserDataSource: NetworkUserDataSource? = null
 
@@ -56,8 +58,24 @@ class RepoUnitTest {
     }
 
     @Test
-    fun getUserDetail_ByName_isCorrect(): Unit = runBlocking {
-        val userModel = UserEntity("0","abc", "asd", "asd", "", 0, 0, true)
+    fun getUserDetail_fromNetwork_isCorrect(): Unit = runBlocking {
+        `when`(networkUserDataSource!!.getUserDetail("abc")).thenReturn(UserDto(0,"abc", "asd", "asd"))
+        val userModel = UserEntity(0,"abc", "asd", "asd", "", 0, 0, false)
+        userDao?.upsertUsers(listOf(userModel))
+        val mockUserDetail = userRepository?.getUserDetail("abc")
+        mockUserDetail?.collect {
+            assertEquals("abc", it.userName)
+            assertEquals("asd", it.avatarUrl)
+            assertEquals("asd", it.landingPageUrl)
+            assertEquals("", it.location)
+            assertEquals(0, it.followers)
+            assertEquals(0, it.following)
+        }
+    }
+
+    @Test
+    fun getUserDetail_fromLocal_isCorrect(): Unit = runBlocking {
+        val userModel = UserEntity(0,"abc", "asd", "asd", "", 0, 0, true)
         userDao?.upsertUsers(listOf(userModel))
         val mockUserDetail = userRepository?.getUserDetail("abc")
         mockUserDetail?.collect {
