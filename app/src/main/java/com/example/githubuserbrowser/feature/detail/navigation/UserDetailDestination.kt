@@ -27,6 +27,7 @@ fun NavGraphBuilder.userDetailScreen(
         UserDetailScreen(
             uiState,
             onBackPressed = {
+                viewModel.clearUiState()
                 onBackPressed()
             }
         )

@@ -1,4 +1,4 @@
-package com.example.githubuserbrowser.feature.detail.components
+package com.example.githubuserbrowser.core.designsystem.components
 
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme

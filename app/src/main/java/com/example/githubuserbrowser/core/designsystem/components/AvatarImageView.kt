@@ -1,4 +1,4 @@
-package com.example.githubuserbrowser.feature.detail.components
+package com.example.githubuserbrowser.core.designsystem.components
 
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
