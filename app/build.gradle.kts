@@ -11,11 +11,11 @@ plugins {
 }
 
 android {
-    namespace = "com.helios.githubuserbrowser"
+    namespace = "com.example.githubuserbrowser"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.helios.githubuserbrowser"
+        applicationId = "com.example.githubuserbrowser"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
@@ -81,6 +81,7 @@ dependencies {
     // Hilt
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.junit.ktx)
     ksp(libs.hilt.compiler)
     ksp(libs.hilt.ext.compiler)
 
@@ -100,12 +101,23 @@ dependencies {
     implementation(libs.room.paging)
     ksp(libs.room.compiler)
 
+    // Unit Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation(libs.androidx.navigation.testing)
+    testImplementation(libs.mockito.core)
+    testImplementation (libs.hilt.android.testing.v244)
+    testImplementation (libs.robolectric)
+
+    // Android X
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(libs.androidx.runner)
+
+    //Glide
+    implementation(libs.compose)
+    implementation(libs.accompanist.drawablepainter)
 }
