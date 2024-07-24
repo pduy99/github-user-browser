@@ -12,7 +12,7 @@ class MapperUnitTest {
 
     @Test
     fun mapper_userDto_to_userEntity_isCorrect(){
-        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123", "m", "hai",0 ,0)
+        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123", "m", "hai",0 ,0, 0)
         val userEntity = mapper.toUserEntity(userDto)
         assertEquals(userDto.id, userEntity.id)
         assertEquals(userDto.userName, userEntity.userName)
@@ -22,12 +22,13 @@ class MapperUnitTest {
         assertEquals(userDto.location, userEntity.location)
         assertEquals(userDto.followers, userEntity.followers)
         assertEquals(userDto.following, userEntity.following)
+        assertEquals(userDto.publicRepo, userEntity.publicRepo)
         assertFalse(userEntity.isLoadedDetail)
     }
 
     @Test
     fun mapper_userDto_to_userModel_isCorrect(){
-        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123", "m", "hai",0 ,0)
+        val userDto = UserDto(0,"hai123", "https://github.com/hai123.png", "https://github.com/hai123")
         val userModel = mapper.asExternalModel(userDto)
         assertEquals(userDto.userName, userModel.userName)
         assertEquals(userDto.avatarUrl, userModel.avatarUrl)
@@ -36,6 +37,7 @@ class MapperUnitTest {
         assertEquals(null, userModel.location)
         assertEquals(null, userModel.followers)
         assertEquals(null, userModel.following)
+        assertEquals(null, userModel.publicRepo)
 
     }
 }

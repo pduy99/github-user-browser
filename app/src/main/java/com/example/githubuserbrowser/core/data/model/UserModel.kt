@@ -11,5 +11,6 @@ data class UserModel(
     val followers: Int? = null,
     val following: Int? = null,
     val fullName: String? = null,
+    val publicRepo: Int? = null
 )
 

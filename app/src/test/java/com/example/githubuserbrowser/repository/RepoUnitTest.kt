@@ -63,7 +63,7 @@ class RepoUnitTest {
     @Test
     fun getUserDetail_fromNetwork_isCorrect(): Unit = runBlocking {
         `when`(networkUserDataSource!!.getUserDetail("abc")).thenReturn(UserDto(0,"abc", "asd", "asd"))
-        val userModel = UserEntity(0,"abc", "asd", "asd", "", 0, 0, false)
+        val userModel = UserEntity(0,"abc", "asd", "asd", "", "", 0, 0, 0, false)
         userDao?.upsertUsers(listOf(userModel))
         val mockUserDetail = userRepository?.getUserDetail("abc")
         mockUserDetail?.collect {
@@ -78,16 +78,18 @@ class RepoUnitTest {
 
     @Test
     fun getUserDetail_fromLocal_isCorrect(): Unit = runBlocking {
-        val userModel = UserEntity(0,"abc", "asd", "asd", "", 0, 0, true)
+        val userModel = UserEntity(0,"abc", "asd", "asd", "", "", 0, 0, 0, true)
         userDao?.upsertUsers(listOf(userModel))
         val mockUserDetail = userRepository?.getUserDetail("abc")
         mockUserDetail?.collect {
             assertEquals("abc", it.userName)
             assertEquals("asd", it.avatarUrl)
-            assertEquals("asd", it.landingPageUrl)
+            assertEquals("", it.landingPageUrl)
             assertEquals("", it.location)
             assertEquals(0, it.followers)
             assertEquals(0, it.following)
+            assertEquals("asd", it.fullName)
+            assertEquals(0, it.publicRepo)
         }
     }
 }

@@ -20,5 +20,7 @@ data class UserDto(
     @SerialName("followers")
     val followers: Int? = null,
     @SerialName("following")
-    val following: Int? = null
+    val following: Int? = null,
+    @SerialName("public_repos")
+    val publicRepo: Int? = null
 )

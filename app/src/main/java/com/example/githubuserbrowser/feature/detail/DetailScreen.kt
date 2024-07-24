@@ -182,10 +182,32 @@ fun UserDetailScreen(uiState: UIState, onBackPressed: () -> Unit) {
                             fontSize = 20.sp
                         )
                     }
-
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(modifier = Modifier) {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_repo),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .height(24.dp)
+                                .width(24.dp)
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = "Public Repo |",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontSize = 20.sp
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = it.publicRepo.toString(),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontSize = 20.sp
+                        )
+                    }
                     Spacer(modifier = Modifier.height(8.dp))
                     it.landingPageUrl.let { homepageUrl ->
-                        val showText = "For more information: $homepageUrl"
+                        val showText = "Look at their homepage: $homepageUrl"
                         HyperlinkText(fullText = showText, linkText = listOf(homepageUrl), hyperlinks = listOf(homepageUrl), fontSize = 20.sp)
                     }
                     Spacer(modifier = Modifier.height(8.dp))

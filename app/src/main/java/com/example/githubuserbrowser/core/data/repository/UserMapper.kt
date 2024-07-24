@@ -13,7 +13,8 @@ class UserMapper {
         location = entity.location,
         followers = entity.followers,
         fullName = entity.fullName,
-        following = entity.following
+        following = entity.following,
+        publicRepo = entity.publicRepo
     )
 
     fun toUserEntity(dto: UserDto) = UserEntity(
@@ -25,6 +26,7 @@ class UserMapper {
         location = dto.location ?: "",
         followers = dto.followers ?: 0,
         following = dto.following ?: 0,
+        publicRepo = dto.publicRepo ?: 0,
         isLoadedDetail = false,
     )
 
@@ -37,7 +39,8 @@ class UserMapper {
         location = dto.location,
         following = dto.following,
         followers = dto.followers,
-        fullName = dto.fullName
+        fullName = dto.fullName,
+        publicRepo = dto.publicRepo
     )
 
 }

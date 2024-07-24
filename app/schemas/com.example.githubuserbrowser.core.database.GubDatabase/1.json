@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8630dc67952f3eddc1db0c7f78599915",
+    "identityHash": "7a241db8743e7c264a4794bef508e765",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `userName` TEXT NOT NULL, `fullName` TEXT NOT NULL, `avatarUrl` TEXT NOT NULL, `landingPageUrl` TEXT NOT NULL, `location` TEXT NOT NULL DEFAULT '', `followers` INTEGER NOT NULL, `following` INTEGER NOT NULL, `isLoadedDetail` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`userName`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `userName` TEXT NOT NULL, `fullName` TEXT NOT NULL, `avatarUrl` TEXT NOT NULL, `landingPageUrl` TEXT NOT NULL, `location` TEXT NOT NULL DEFAULT '', `followers` INTEGER NOT NULL, `following` INTEGER NOT NULL, `publicRepo` INTEGER NOT NULL, `isLoadedDetail` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`userName`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -58,6 +58,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "publicRepo",
+            "columnName": "publicRepo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "isLoadedDetail",
             "columnName": "isLoadedDetail",
             "affinity": "INTEGER",
@@ -78,7 +84,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8630dc67952f3eddc1db0c7f78599915')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7a241db8743e7c264a4794bef508e765')"
     ]
   }
 }
